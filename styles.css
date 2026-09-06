@@ -1,0 +1,316 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Sahara design system.
+ * Deep navy primary, green = safe, red = emergency, amber = warning/offline.
+ * All colors in oklch. Components consume only semantic tokens.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --font-sans:
+    "Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Emergency semantic palette */
+  --color-safe: var(--safe);
+  --color-safe-foreground: var(--safe-foreground);
+  --color-safe-soft: var(--safe-soft);
+  --color-safe-border: var(--safe-border);
+  --color-emergency: var(--emergency);
+  --color-emergency-foreground: var(--emergency-foreground);
+  --color-emergency-soft: var(--emergency-soft);
+  --color-emergency-border: var(--emergency-border);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --color-navy-soft: var(--navy-soft);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+
+  --shadow-card: 0 1px 2px oklch(0.2 0.03 260 / 0.06), 0 2px 8px oklch(0.2 0.03 260 / 0.05);
+  --shadow-action: 0 2px 4px oklch(0.2 0.03 260 / 0.12), 0 6px 16px oklch(0.2 0.03 260 / 0.1);
+  --shadow-nav: 0 -1px 0 oklch(0.2 0.03 260 / 0.08), 0 -4px 16px oklch(0.2 0.03 260 / 0.06);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  --background: oklch(0.975 0.003 250);
+  --foreground: oklch(0.2 0.03 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.03 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 262);
+
+  --navy: oklch(0.27 0.07 262);
+  --navy-foreground: oklch(0.985 0.003 250);
+  --navy-soft: oklch(0.94 0.02 262);
+
+  --primary: var(--navy);
+  --primary-foreground: var(--navy-foreground);
+  --secondary: oklch(0.95 0.008 255);
+  --secondary-foreground: oklch(0.27 0.07 262);
+  --muted: oklch(0.95 0.008 255);
+  --muted-foreground: oklch(0.48 0.03 258);
+  --accent: oklch(0.94 0.02 262);
+  --accent-foreground: oklch(0.27 0.07 262);
+
+  --safe: oklch(0.55 0.15 150);
+  --safe-foreground: oklch(0.99 0 0);
+  --safe-soft: oklch(0.95 0.04 150);
+  --safe-border: oklch(0.82 0.1 150);
+
+  --emergency: oklch(0.55 0.21 27);
+  --emergency-foreground: oklch(0.99 0 0);
+  --emergency-soft: oklch(0.95 0.03 27);
+  --emergency-border: oklch(0.83 0.09 27);
+
+  --warning: oklch(0.72 0.16 70);
+  --warning-foreground: oklch(0.22 0.05 70);
+  --warning-soft: oklch(0.96 0.05 85);
+  --warning-border: oklch(0.85 0.1 80);
+
+  --info: oklch(0.55 0.13 250);
+  --info-foreground: oklch(0.99 0 0);
+  --info-soft: oklch(0.95 0.025 250);
+  --info-border: oklch(0.83 0.07 250);
+
+  --destructive: var(--emergency);
+  --destructive-foreground: var(--emergency-foreground);
+  --border: oklch(0.9 0.01 255);
+  --input: oklch(0.88 0.01 255);
+  --ring: oklch(0.45 0.12 262);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "tnum";
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* Reusable Sahara surfaces */
+@utility resq-card {
+  background-color: var(--color-card);
+  color: var(--color-card-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+@utility tap-target {
+  min-height: 3rem;
+  min-width: 3rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Typography levels */
+@utility section-label {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+/* Button system: same radius family, consistent height, clear pressed / disabled states. */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  min-width: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-lg);
+  font-weight: 800;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+  text-align: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 150ms ease,
+    transform 120ms ease,
+    opacity 150ms ease;
+  &:active {
+    transform: scale(0.98);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+@utility btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  &:hover:not(:disabled) {
+    background-color: color-mix(in oklab, var(--color-primary) 90%, black);
+  }
+}
+
+@utility btn-secondary {
+  background-color: var(--color-card);
+  color: var(--color-foreground);
+  border: 2px solid var(--color-input);
+  &:hover:not(:disabled) {
+    background-color: var(--color-muted);
+  }
+}
+
+@utility btn-safe {
+  background-color: var(--color-safe);
+  color: var(--color-safe-foreground);
+  &:hover:not(:disabled) {
+    background-color: color-mix(in oklab, var(--color-safe) 90%, black);
+  }
+}
+
+@utility btn-danger {
+  background-color: var(--color-emergency);
+  color: var(--color-emergency-foreground);
+  &:hover:not(:disabled) {
+    background-color: color-mix(in oklab, var(--color-emergency) 90%, black);
+  }
+}
+
+@utility btn-warning {
+  background-color: var(--color-warning);
+  color: var(--color-warning-foreground);
+  &:hover:not(:disabled) {
+    background-color: color-mix(in oklab, var(--color-warning) 90%, black);
+  }
+}
+
+@utility btn-ghost {
+  background-color: transparent;
+  color: var(--color-primary);
+  &:hover:not(:disabled) {
+    background-color: var(--color-muted);
+  }
+}
+
+/* Large emergency actions (52–60 px+) */
+@utility btn-lg {
+  min-height: 3.75rem;
+  font-size: 1.125rem;
+  border-radius: var(--radius-xl);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.sahara-road-label {
+  color: #615b51;
+  font: 10px/18px sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 2px white,
+    1px 0 2px white,
+    -1px 0 2px white;
+  pointer-events: none;
+}
+.sahara-shelter-pin {
+  width: 30px;
+  height: 30px;
+  border: 3px solid white;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  font: bold 15px/24px sans-serif;
+  box-shadow: 0 2px 5px #0005;
+}
+.sahara-shelter-pin.selected {
+  outline: 3px solid #1f2a4a;
+}
+.sahara-hazard-pin {
+  width: 30px;
+  height: 30px;
+  border: 3px solid white;
+  border-radius: 50% 50% 50% 10%;
+  background: #dc6a12;
+  color: white;
+  text-align: center;
+  font: 900 18px/24px sans-serif;
+  box-shadow: 0 2px 7px #0007;
+  transform: rotate(-45deg);
+}
+.sahara-hazard-pin span {
+  display: block;
+  transform: rotate(45deg);
+}
+.leaflet-container {
+  font-family: inherit;
+  touch-action: pan-x pan-y;
+}

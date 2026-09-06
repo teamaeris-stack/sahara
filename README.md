@@ -1,706 +1,277 @@
-# SAHARA
-
-We are building a disaster-resilience application called ResQ.
-
-For this step, build ONLY PHASE 1.
-
-Do NOT build SOS forms, shelters, maps, responder dashboards, community alerts, relay networking, emergency guidance, family tracking, authentication, backend integrations, Supabase, Firebase, or APIs yet.
-
-The goal of Phase 1 is to create an extremely stable foundation and the main Citizen Disaster Mode home screen.
-
-==================================================
-
-PRODUCT
-
-==================================================
-
-Name:
-
-ResQ
-
-Tagline:
-
-People. Families. Safer Together.
-
-Core principle:
-
-“When the network disappears, ResQ doesn’t.”
-
-ResQ is an offline-first emergency application intended to remain useful when internet and cellular infrastructure fail.
-
-For now we are creating only the app shell, citizen home screen, offline-state simulation, and local persistence.
-
-==================================================
-
-TECHNICAL CONSTRAINTS
-
-==================================================
-
-Use the existing Lovable React + TypeScript environment.
-
-Use:
-
-- React
-
-- TypeScript
-
-- Tailwind
-
-- Lucide icons if already available
-
-- localStorage
-
-- simple application state
-
-DO NOT use:
-
-- Supabase
-
-- Firebase
-
-- external APIs
-
-- authentication
-
-- Google Maps
-
-- API keys
-
-- additional heavy dependencies
-
-- external data services
-
-The project must run immediately after generation.
-
-Do not change package configuration unless absolutely necessary.
-
-Do not install unnecessary libraries.
-
-==================================================
-
-MOBILE-FIRST REQUIREMENT
-
-==================================================
-
-Design primarily for a smartphone.
-
-The UI should look like a real mobile emergency application, not a desktop website squeezed onto a phone.
-
-It must still respond properly on desktop.
-
-Target users include:
-
-- elderly users
-
-- users with low digital literacy
-
-- frightened or stressed users
-
-- people using older phones
-
-- users who may operate the phone one-handed
-
-Therefore:
-
-- extremely clear hierarchy
-
-- large touch targets
-
-- large readable text
-
-- large icons
-
-- minimal text
-
-- no complicated menus
-
-- no tiny controls
-
-- no excessive animation
-
-- no visual clutter
-
-Never communicate an important state through color alone.
-
-Use:
-
-ICON + TEXT + COLOR.
-
-==================================================
-
-VISUAL IDENTITY
-
-==================================================
-
-Create a professional emergency-response visual identity.
-
-Primary:
-
-Deep navy / dark blue
-
-Safe:
-
-Green
-
-Emergency:
-
-Red
-
-Warning / offline:
-
-Amber
-
-Background:
-
-Very light gray / off-white
-
-Cards:
-
-White with subtle borders/shadows
-
-Use rounded corners but do not make the application look playful.
-
-The product should feel:
-
-- trustworthy
-
-- serious
-
-- modern
-
-- calm
-
-- accessible
-
-Avoid:
-
-- gradients everywhere
-
-- glassmorphism
-
-- cyberpunk styling
-
-- unnecessary animations
-
-- generic SaaS appearance
-
-- cartoon emergency graphics
-
-==================================================
-
-APP SHELL
-
-==================================================
-
-Create a reusable mobile application shell.
-
-Top header:
-
-ResQ
-
-Under or beside it:
-
-small network status indicator.
-
-Possible states:
-
-ONLINE
-
-OFFLINE
-
-When online:
-
-green indicator
-
-“Connected”
-
-When offline:
-
-amber/red offline icon
-
-“Offline Resilience Mode”
-
-At the bottom create a mobile navigation bar with:
-
-HOME
-
-FAMILY
-
-SHELTERS
-
-GUIDE
-
-MORE
-
-For Phase 1:
-
-HOME is active.
-
-The other tabs should exist visually because they establish the final product navigation.
-
-If selected during Phase 1, they should NOT open broken or empty pages.
-
-Instead display a clean temporary informational panel:
-
-“Coming in the next build phase.”
-
-and provide a clear button:
-
-BACK TO HOME
-
-Do not create fake unfinished content.
-
-==================================================
-
-CITIZEN HOME SCREEN
-
-==================================================
-
-The default screen must be the Citizen Home screen.
-
-At the top of the content:
-
-A prominent banner:
-
-⚠ DISASTER MODE ACTIVE
-
-Below it show network state.
-
-When ONLINE:
-
-CONNECTED
-
-Emergency services can synchronize normally.
-
-When OFFLINE:
-
-OFFLINE RESILIENCE MODE
-
-Large supporting text:
-
-“ResQ is still working.”
-
-And smaller text:
-
-“Critical actions and information remain available on this device.”
-
-The offline state must feel reassuring and deliberate, NOT like an application error.
-
-==================================================
-
-PRIMARY EMERGENCY ACTIONS
-
-==================================================
-
-Create THREE very large stacked buttons.
-
-1.
-
-GREEN
-
-check-circle icon
-
-I’M SAFE
-
-2.
-
-RED
-
-SOS / alert icon
-
+SAHARA — Offline-First Disaster Resilience Platform
+> **People. Families. Safer Together.**  
+> A mobile-first disaster-management platform designed to remain useful when internet and cellular connectivity become unreliable.
+SAHARA helps people check in, request help, find shelters, navigate around reported hazards, coordinate with family members, access emergency guidance, and relay SOS packets between nearby devices during natural disasters.
+The project was built as a hackathon prototype with a strong focus on offline resilience, simple emergency UX, local-first operation, and community coordination.
+---
+Why SAHARA?
+During floods, landslides, earthquakes, storms, and other disasters, communication infrastructure can fail exactly when people need it most. Many emergency applications depend heavily on a continuous internet connection.
+SAHARA takes a different approach:
+essential actions remain available locally;
+emergency information is cached on-device;
+SOS requests can be queued when internet is unavailable;
+maps and emergency guidance can work from packaged local data;
+nearby devices can act as a bridge toward a connected gateway;
+family status and last-confirmed information remain visible during outages.
+---
+Core Features
+1. Disaster Check-In
+SAHARA presents a clear emergency status flow with large, accessible actions:
+I'M SAFE
 I NEED HELP
-
-3.
-
-NEUTRAL / AMBER
-
-message / status icon
-
-CAN’T RESPOND
-
-These should dominate the page.
-
-They must be easy to hit with one hand.
-
-==================================================
-
-I’M SAFE — IMPLEMENT THIS NOW
-
-==================================================
-
-The I’M SAFE button must already be functional in Phase 1.
-
-When pressed:
-
-change the user's local safety status to SAFE.
-
-Show a confirmation panel:
-
-✓ YOU ARE MARKED SAFE
-
-Include:
-
-Status:
-
-SAFE
-
-Last updated:
-
-current local time
-
-Storage:
-
-Saved on this device
-
-If OFFLINE also display:
-
-“Your status is stored locally and will synchronize when connectivity becomes available.”
-
-Persist this information using localStorage.
-
-If the page is refreshed, the SAFE status must remain.
-
-The home screen should then show a small persistent status card:
-
-YOUR STATUS
-
-✓ SAFE
-
-Updated:
-
-[time]
-
-Include:
-
-UPDATE STATUS
-
-This can reopen the status choice.
-
-==================================================
-
-I NEED HELP — PHASE 1 BEHAVIOUR
-
-==================================================
-
-Do NOT build the actual SOS form yet.
-
-When I NEED HELP is pressed, open a clean modal or panel saying:
-
-I NEED HELP
-
-“Emergency reporting will open here.”
-
-Below:
-
-“Phase 2 will add offline SOS creation, location, people count, medical needs and delivery status.”
-
-Button:
-
-RETURN HOME
-
-This is temporary and must look deliberate rather than broken.
-
-Do NOT fabricate a working SOS system yet.
-
-==================================================
-
-CAN’T RESPOND — PHASE 1 BEHAVIOUR
-
-==================================================
-
-When pressed:
-
-display:
-
-CAN’T RESPOND STATUS
-
-“ResQ can preserve your last known status when you cannot provide a full update.”
-
-For now provide:
-
-SAVE STATUS
-
-When clicked:
-
-store locally:
-
-status = CANNOT_RESPOND
-
-timestamp = current local time
-
-Then show:
-
-STATUS STORED ON DEVICE
-
-Persist using localStorage.
-
-==================================================
-
-SECONDARY ACTIONS
-
-==================================================
-
-Below the three main emergency controls create a clean 2 × 2 grid.
-
-Cards:
-
-🏠
-
-FIND SHELTER
-
-🧭
-
-GUIDE ME
-
-👨‍👩‍👧
-
-FAMILY
-
-🤝
-
-HELP NEARBY
-
-These are navigation previews only during Phase 1.
-
-When tapped, show a clean message indicating that the feature belongs to a later build phase.
-
-Do NOT generate those systems yet.
-
-==================================================
-
-OFFLINE INFORMATION CARD
-
-==================================================
-
-At the bottom of the home screen create a subtle information card.
-
-When ONLINE:
-
-“ResQ is connected.”
-
-When OFFLINE:
-
-📵 OFFLINE-FIRST
-
-“Emergency information remains stored on this device.”
-
-“Actions will be queued until a delivery path becomes available.”
-
-Do not imply that Bluetooth relay is already implemented.
-
-==================================================
-
-DEMO CONTROL
-
-==================================================
-
-We need one extremely simple developer/demo control for testing.
-
-Place a small unobtrusive button in the header or More area:
-
-DEMO
-
-When opened, show:
-
-NETWORK SIMULATION
-
-ONLINE
-
-OFFLINE
-
-Use a segmented toggle.
-
-Changing it must instantly change the global network state.
-
-Persist the selected network state in localStorage.
-
-If I switch to OFFLINE and refresh the browser, the application must still show OFFLINE.
-
-Also include:
-
-RESET LOCAL DEMO DATA
-
-When pressed, request confirmation.
-
-If confirmed:
-
-clear ResQ localStorage data
-
-restore network = ONLINE
-
-restore user status = UNKNOWN
-
-Return to Home.
-
-==================================================
-
-APPLICATION STATE
-
-==================================================
-
-Use clean centralized state where practical.
-
-For Phase 1 maintain:
-
-networkStatus:
-
-ONLINE | OFFLINE
-
-disasterMode:
-
-true
-
-userStatus:
-
-UNKNOWN | SAFE | CANNOT_RESPOND
-
-statusUpdatedAt:
-
-timestamp or null
-
-Persist the important values in localStorage.
-
-Use a clear ResQ-specific key namespace so unrelated browser storage is not deleted.
-
-Example:
-
-resq_network_status
-
-resq_user_status
-
-resq_status_updated_at
-
-==================================================
-
-RESPONSIVENESS
-
-==================================================
-
-Test layout conceptually at:
-
-360px width
-
-390px width
-
-430px width
-
-desktop
-
-There must be:
-
-- no horizontal scrolling
-
-- no clipped text
-
-- no overlapping buttons
-
-- no tiny controls
-
-- no strange excessive whitespace
-
-On desktop:
-
-center the citizen interface in a sensible application-width container instead of stretching emergency buttons across the entire monitor.
-
-==================================================
-
-ACCESSIBILITY
-
-==================================================
-
-Use semantic buttons.
-
-Add aria-labels where appropriate.
-
-Provide visible keyboard focus.
-
-Ensure strong contrast.
-
-Use meaningful icons.
-
-Emergency labels must remain text-based even when icons are present.
-
-Do not rely on red/green alone.
-
-==================================================
-
-PHASE 1 ACCEPTANCE REQUIREMENTS
-
-==================================================
-
-Before considering Phase 1 complete, verify that:
-
-1. App loads without errors.
-
-2. Citizen Home is the default screen.
-
-3. Mobile design is polished.
-
-4. Disaster Mode banner is visible.
-
-5. ONLINE/OFFLINE demo toggle works.
-
-6. Network state survives refresh.
-
-7. OFFLINE mode clearly says “ResQ is still working.”
-
-8. I’M SAFE works.
-
-9. SAFE status survives refresh.
-
-10. CAN’T RESPOND status works and survives refresh.
-
-11. I NEED HELP does not crash and opens its temporary Phase 2 panel.
-
-12. Secondary feature cards do not lead to empty/broken pages.
-
-13. Bottom navigation works safely.
-
-14. Reset Demo Data works.
-
-15. There are no external API/backend requirements.
-
-16. There are no console-breaking errors.
-
-17. There is no horizontal overflow on mobile.
-
-18. No advanced feature from later phases has been unnecessarily implemented.
-
-==================================================
-
-IMPORTANT
-
-==================================================
-
-Do not attempt to impress me by building later features.
-
-A clean and flawless Phase 1 is more important than building more.
-
-Do not refactor unrelated project configuration.
-
-Do not introduce backend architecture.
-
-Do not ask questions.
-
-Implement Phase 1 now and stop after Phase 1 is complete.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/71dccfd9-2c25-4a20-8311-f2f2322f171a).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+automatic No Response handling when a user does not check in
+periodic safety re-checks during an active disaster
+The interface is intentionally simple for stressed users, elderly users, and people with low digital literacy.
+2. One-Tap and Documented SOS
+Two emergency-reporting paths are available:
+SOS NOW — immediate one-tap emergency packet
+Documented SOS — structured information about the type of emergency, affected people, and additional details
+SOS information is stored locally first so the app does not depend on a successful network request before recording an emergency.
+3. Sahara Emergency Relay
+The Android prototype includes a nearby-device relay architecture built around Google Nearby Connections.
+A disconnected phone can operate as an Offline Relay Node, while another nearby phone with connectivity can operate as a Gateway.
+Conceptual flow:
+```text
+Offline Phone A ─┐
+                 ├── Nearby Device-to-Device Relay ──> Gateway Phone ──> Online services
+Offline Phone B ─┘
+```
+Emergency packets can contain information such as:
+packet ID
+emergency type
+number of affected people
+description
+timestamp
+This allows emergency information to move locally even when the originating phone has no direct internet connection.
+> **Prototype note:** the Nearby relay is an Android-native hackathon feature. Native relay behavior has been validated separately and the merged application integration should be treated as experimental rather than production infrastructure.
+4. Family Rescue and Last Confirmed Status
+The Family module supports editable family groups instead of fixed roles.
+Users can:
+add family members with custom names;
+rename or remove members;
+maintain separate device identities;
+share safety status, SOS summaries, and last-confirmed locations when a shared backend is available;
+keep cached family information visible while offline;
+request family check-ins;
+view member details and route toward their last confirmed location.
+Local-only family records can also be used without a backend.
+5. Offline Shelters and Safe Zones
+SAHARA provides locally packaged shelter data with information such as:
+availability status;
+capacity and available spaces;
+food and water;
+first aid / medical support;
+accessibility;
+toilets and other facilities;
+last verification time.
+The current prototype uses demo shelter locations around Aluva, Kerala for deterministic testing.
+6. Hazard-Aware Offline Routing
+The routing system uses locally packaged road/map data and can react to reported hazards such as:
+flooding;
+landslides;
+blocked roads;
+inaccessible bridges;
+debris;
+structural damage.
+When a road is confirmed as blocked, the route engine can exclude the affected road and calculate an alternate path where one exists.
+The map visually distinguishes the blocked segment from the new valid route.
+7. Offline Emergency Guide
+Emergency guidance is available directly inside the app for multiple disaster and assistance scenarios.
+The guide is designed as a step-by-step interface with:
+large icons and text;
+simple navigation;
+offline-accessible instructions;
+English / Hindi support in the wider application;
+optional device speech support where available.
+8. Community Assistance
+SAHARA also includes a local community-assistance concept where eligible nearby safe users can see assistance requests and respond until professional help arrives.
+This feature is designed to complement — not replace — official emergency services.
+---
+Offline-First Architecture
+SAHARA follows a local-first design:
+```text
+                        ┌──────────────────────┐
+                        │   Shared Backend     │
+                        │  (when reachable)    │
+                        └──────────▲───────────┘
+                                   │ sync
+                                   │
+┌────────────────┐       ┌─────────┴─────────┐       ┌────────────────┐
+│ Offline Phone  │ <---> │  Gateway / Phone │ <---> │ Offline Phone  │
+│ Local Storage  │ relay │  Local Storage   │ relay │ Local Storage  │
+└────────────────┘       └───────────────────┘       └────────────────┘
+        │                         │                         │
+        ├─ SOS queue              ├─ cached state           ├─ SOS queue
+        ├─ emergency guide        ├─ offline maps           ├─ family cache
+        ├─ family cache           └─ sync when online       └─ guidance
+        └─ shelter/map data
+```
+An internet connection improves synchronization, but essential information is designed to remain available locally.
+---
+Tech Stack
+Layer	Technology
+Frontend	React 19 + TypeScript
+Build Tool	Vite
+Routing	TanStack Router / TanStack Start
+Styling	Tailwind CSS
+Icons	Lucide React
+Mobile Runtime	Capacitor 8
+Android Native	Java
+Device Relay	Google Nearby Connections
+Maps	Leaflet + packaged local map/road data
+Offline Routing	Local graph / A* based routing
+Local Persistence	Browser/device local storage and cached application state
+Shared Family Demo	Node.js HTTP server + persistent JSON storage
+Validation	Node test runner + route/routing smoke tests
+---
+Project Structure
+```text
+SAHARA/
+├── android/                     # Capacitor Android project + native relay plugin
+├── public/                      # Public/static assets
+├── scripts/
+│   ├── family-server.mjs        # Shared family demo backend
+│   ├── prepare-mobile.mjs       # Mobile build preparation
+│   └── *.test.mjs               # Backend/routing validation
+├── src/
+│   ├── components/resq/         # Main mobile UI components
+│   │   ├── HomeScreen.tsx
+│   │   ├── RelayPanel.tsx
+│   │   ├── FamilyScreen.tsx
+│   │   ├── FamilyMembersEditor.tsx
+│   │   ├── SheltersScreen.tsx
+│   │   ├── OfflineMap.tsx
+│   │   ├── GuideScreen.tsx
+│   │   └── SosFlow.tsx
+│   ├── lib/
+│   │   ├── sahara-relay.ts      # Capacitor bridge for native relay
+│   │   ├── family-sync.tsx
+│   │   ├── offline-routing.ts
+│   │   ├── shelters.ts
+│   │   ├── sos.ts
+│   │   └── resq-store.tsx
+│   └── routes/                  # Application routes
+├── capacitor.config.ts
+├── vite.mobile.config.ts
+└── package.json
+```
+---
+Run the Web App Locally
+Prerequisites
+Node.js
+npm
+Clone the repository and install dependencies:
+```bash
+git clone <your-repository-url>
+cd <repository-folder>
+npm install
+```
+Start the development server:
+```bash
 npm run dev
 ```
+Open the local address printed by Vite.
+---
+Run the Shared Family Demo Server
+Start the included local family server:
+```bash
+npm run family:server
+```
+By default the demo server listens on port `8787`.
+Useful environment variables:
+```text
+SAHARA_FAMILY_PORT
+SAHARA_FAMILY_HOST
+SAHARA_FAMILY_DB
+SAHARA_ALLOWED_ORIGINS
+```
+For multiple physical phones, all devices must use the same backend that is reachable from those phones. A production deployment should place this service behind HTTPS and use a proper persistent database and authentication system.
+---
+Build the Android App
+Build the mobile web bundle:
+```bash
+npm run build:mobile
+```
+Sync it into the Capacitor Android project:
+```bash
+npx cap sync android
+```
+Build a debug APK on Windows:
+```powershell
+cd android
+$env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat assembleDebug
+```
+The APK is generated at:
+```text
+android/app/build/outputs/apk/debug/app-debug.apk
+```
+Install it with ADB:
+```powershell
+adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+```
+---
+Three-Phone Relay Demonstration
+A useful prototype demonstration uses three Android phones:
+Phone C — Gateway
+Internet: ON
+Bluetooth: ON
+Location / Nearby permission: ON
+Open SAHARA and select GATEWAY
+Phone A and Phone B — Offline Nodes
+Mobile data: OFF
+no active internet connection
+Bluetooth: ON
+Wi-Fi radio may remain enabled for local Nearby transport
+Location / Nearby permission: ON
+select OFFLINE RELAY
+Then:
+Confirm the gateway reports connected devices.
+Send SOS NOW from Phone A.
+Confirm the emergency packet appears on Phone C.
+Send a documented emergency from Phone B.
+Confirm the second packet reaches the gateway.
+Nearby Connections may use Bluetooth, BLE, and local Wi-Fi transports depending on the devices; the phones do not need to be manually paired in Android Bluetooth settings.
+---
+Key Design Principles
+Emergency-first UX
+Important actions use large touch targets, readable text, clear icons, and minimal navigation depth.
+Local-first operation
+Emergency information is recorded locally before depending on network delivery.
+Honest status visibility
+The interface distinguishes locally saved, queued, relayed, and synchronized information rather than pretending connectivity exists.
+Accessibility
+Important states are communicated using icon + text + color, rather than color alone.
+Natural-disaster focus
+The prototype prioritizes scenarios such as floods, landslides, blocked roads, shelter access, evacuation, missing people, and family coordination.
+---
+Current Prototype Limitations
+SAHARA is a hackathon/research prototype, not a certified emergency-service product.
+Shelter locations and capacities in the current Aluva demo are demonstration data and must not be treated as verified operational shelters.
+Hazard-aware routing only knows hazards that are packaged or reported to the application; it cannot guarantee that a route is safe.
+GPS updates are foreground confirmations, not continuous professional tracking.
+A locally stored or family-shared SOS is not proof that official emergency services received it.
+The shared family backend is a lightweight prototype server, not a production emergency backend.
+The Nearby relay is an experimental Android prototype and requires compatible permissions/radios/devices.
+Production deployment would require stronger authentication, encryption, backend redundancy, verified shelter feeds, official responder integration, privacy controls, and extensive field testing.
+---
+Future Scope
+verified government/NGO shelter feeds;
+responder and control-room dashboard;
+stronger end-to-end relay security;
+multi-hop store-and-forward mesh networking;
+automatic gateway discovery and prioritization;
+authenticated family accounts and recovery;
+live disaster alerts from verified sources;
+responder acknowledgement and incident lifecycle tracking;
+stronger multilingual and accessibility support;
+background-safe location sharing with explicit user consent;
+production-grade encrypted cloud synchronization.
+---
+Team / Hackathon
+Built as SAHARA, an offline-first disaster resilience and emergency coordination prototype.
+Mission: keep essential emergency coordination useful even when normal connectivity becomes unreliable.
+---
+Disclaimer
+SAHARA is an experimental prototype for demonstration, research, and hackathon purposes. It is not a replacement for official emergency services, verified evacuation instructions, or professional medical/rescue guidance.

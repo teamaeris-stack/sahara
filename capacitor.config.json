@@ -1,0 +1,8 @@
+{
+  "appId": "com.sahara.disaster",
+  "appName": "Sahara",
+  "webDir": "mobile-dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
